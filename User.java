@@ -3,7 +3,7 @@
  public class User {
 
     // Maximum number of users that a user can follow
-    private static int maxfCount = 10;
+    static int maxfCount = 10;
 
     private String name;       // name of this user
     private String[] follows;  // array of user names that this user follows
@@ -89,14 +89,14 @@
     /*  Notice: This is the size of the intersection of the two follows lists. */
     public int countMutual(User other) {
         //// Replace the following statement with your code
-       int countCommonFollowers = 0;
-       for (int i = 0; i < fCount; i++) {
-           if (other.follows(this.follows[i])) {
-               countCommonFollowers++;
-           }
-       }
-       return countCommonFollowers;
-   }
+    int countCommonFollowers = 0;
+    for (int i = 0; i < fCount; i++) {
+        if (other.follows(this.follows[i])) {
+            countCommonFollowers++;
+        }
+    }
+    return countCommonFollowers;
+}
 
     /** Checks is this user is a friend of the other user.
      *  (if two users follow each other, they are said to be "friends.") */
