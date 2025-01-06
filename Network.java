@@ -22,22 +22,17 @@ public class Network {
         userCount = 3;
     }
 
-    public int getUserCount() {
-        return this.userCount;
-    }
     /** Finds in this network, and returns, the user that has the given name.
      *  If there is no such user, returns null.
      *  Notice that the method receives a String, and returns a User object. */
     public User getUser(String name) {
-        //// Replace the following statement with your code
-        for (int i = 0; i < userCount; i++) {
-            if (users[i].getName().equals(name)) {
-                return users[i];
+        for (int i = 0; i < this.userCount; i++) {
+            if (name.equalsIgnoreCase(this.users[i].getName())) {
+                return this.users[i];
             }
         }
         return null;
     }
-
     /** Adds a new user with the given name to this network.
     *  If ths network is full, does nothing and returns false;
     *  If the given name is already a user in this network, does nothing and returns false;
@@ -56,13 +51,19 @@ public class Network {
      *  If any of the two names is not a user in this network,
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
-        User user1 = getUser(name1);
-        User user2 = getUser(name2);
-    
-        if (user1 == null || user2 == null) {
-            return false; 
+        if (name1 == null || name2 == null) {
+            return false;
         }
-        return user1.addFollowee(user2.getName()); 
+        User user1 = this.getUser(name1);
+        User user2 = this.getUser(name2);
+        if (user1 == null || user2 == null || name1 == name2) {
+            return false;
+        }
+        boolean result = user1.addFollowee(name2);
+        if (result) {
+            return true;
+        }
+        return false;
     }
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
@@ -123,12 +124,27 @@ public class Network {
 
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
-       //// Replace the following statement with your code
-        if(this.userCount == 0) return "";
-        String str = "Network: ";
-        for(int i = 0 ; i < this.userCount ; i ++) {
-            str += this.users[i].toString() +"\n";
+        String output = "";
+        output += "Network:";
+        for (int i = 0; i < this.userCount; i++) {
+            output += "\n" + this.users[i];
         }
-        return str;
+        return output;
+    }
+
+    public User[] getUsers() {
+        return users;
+    }
+
+    public void setUsers(User[] users) {
+        this.users = users;
+    }
+
+    public int getUserCount() {
+        return userCount;
+    }
+
+    public void setUserCount(int userCount) {
+        this.userCount = userCount;
     }
 }
