@@ -43,28 +43,27 @@
 
     /** If this user follows the given name, returns true; otherwise returns false. */
     public boolean follows(String name) {
-        //// Replace the following statement with your code
-        for (int i = 0; i < this.fCount; i++) { //CREATING A FORLOOP WHICH RUN ALL OVER THE ARRAY 
-                if (name.equals(this.follows[i])) { // CHECKS IF THE "NAME" IS APPEARS IN THE ARRAY 
-                    return true;
-                }
+        for (int i = 0; i < this.fCount; i++) {
+            if (name.equalsIgnoreCase(this.follows[i])) {
+                return true;
+            }
         }
-        return false; //RETURN THE BOOLEAN VALUE
+        return false;
     }
+
     /** Makes this user follow the given name. If successful, returns true. 
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
     public boolean addFollowee(String name) {
-        //// Replace the following statement with your code
-        if (this.fCount ==follows.length){
+        if (this.fCount == follows.length) {
             return false;
         }
         if (follows(name)) {
             return false;
         }
-
+    
         this.follows[this.fCount] = name;
-        this.fCount = this.fCount + 1; 
-        return true; 
+        this.fCount++;
+        return true;
     }
 
     /** Removes the given name from the follows list of this user. If successful, returns true.
