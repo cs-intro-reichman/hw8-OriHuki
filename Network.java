@@ -125,6 +125,11 @@ public class Network {
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
        //// Replace the following statement with your code
-       return null;
+        if(this.userCount == 0) return "";
+        String str = "Network: ";
+        for(int i = 0 ; i < this.userCount ; i ++) {
+            str += this.users[i].toString() +"\n";
+        }
+        return str;
     }
 }
